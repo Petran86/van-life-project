@@ -2,25 +2,30 @@ import React from 'react'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import Home from './components/Home/Home';
 import About from './components/About/About';
+import Vans from './components/Vans/Vans';
 import './App.css';
+
+import "./server"
 
 function App() {
   return (
     <BrowserRouter>
-      <div className='container'>
-        <nav className='navbar'>
-          <Link to="/" className='nav-home'>#VANLIFE</Link>
+      <header>
+        <Link to="/" className='nav-home'>#VANLIFE</Link>
+        <nav>
           <Link to="/about" className='nav-about'>About</Link>
-          <Link to="/about" className='nav-about'>Vans</Link>
+          <Link to="/vans" className='nav-about'>Vans</Link>
         </nav>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/about' element={<About />} />
-        </Routes>
-        <div className='footer'>
-          <p>&copy; 2024 #VANLIFE</p>
-        </div>
+      </header>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/vans' element={<Vans />} />
+      </Routes>
+      <div className='footer'>
+        <p>&copy; 2024 #VANLIFE</p>
       </div>
+
     </BrowserRouter>
   );
 }
