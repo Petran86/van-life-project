@@ -11,7 +11,7 @@
     "react-router-dom": "^6.26.1",
     "react-scripts": "^5.0.1",
     "web-vitals": "^2.1.4",
-    "@babel/plugin-proposal-private-property-in-object": "^4.0.6"
+    "@babel/plugin-proposal-private-property-in-object": "7.21.0-placeholder-for-preset-env.2"
   },
   "scripts": {
     "start": "react-scripts start",
