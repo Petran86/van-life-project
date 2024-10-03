@@ -17,6 +17,7 @@ import HostLayout from './components/HostLayout';
 import './App.css';
 
 import "./server"
+import NotFound from './components/NotFound';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path='/host' element={<HostLayout />}>
             <Route index element={<Dashboard />} />
             <Route path='income' element={<Income />} />
+            <Route path='vans' element={<HostVans />} />
             <Route path='reviews' element={<Reviews />} />
             <Route path='vans/:id' element={<HostVanDetail />}>
               <Route index element={<HostVanInfo />} />
@@ -38,6 +40,7 @@ function App() {
               <Route path='photos' element={<HostVanPhotos />} />
             </Route>
           </Route>
+          <Route path='*' element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
