@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { getVans } from "../../api";
 
 export default function Vans() {
     const [searchParams, setSearchParams] = useSearchParams()
@@ -9,9 +10,11 @@ export default function Vans() {
     const filteredVans = typeFilter ? vans.filter(van => van.type === typeFilter) : vans
 
     React.useEffect(() => {
-        fetch("/api/vans")
-            .then(res => res.json())
-            .then(data => setVans(data.vans))
+        async function loadVans() {
+            const data = await getVans()
+            setVans(data)
+        }
+        loadVans()
     }, [])
 
     const vanElements = filteredVans.map(van => (
