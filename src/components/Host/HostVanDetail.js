@@ -1,21 +1,47 @@
 import React from "react";
 import { useParams } from "react-router";
 import { Link, NavLink, Outlet } from "react-router-dom";
+import { getVan } from "../../api";
 
 export default function HostVanDetail() {
-    const params = useParams()
+    const { id } = useParams()
     const [hostVanDeets, setHostVanDeets] = React.useState([])
+    const [Loading, setLoading] = React.useState(false)
+    const [error, setError] = React.useState(null)
     const activeStyle = {
         fontWeight: "bold",
         textDecoration: "underline",
         color: "#161616"
     }
 
+    // React.useEffect(() => {
+    //     fetch(`/api/host/vans/${params.id}`)
+    //         .then(res => res.json())
+    //         .then(data => setHostVanDeets(data.vans[0])) /* using the index cause of mishap on server */
+    // }, [id])
+
     React.useEffect(() => {
-        fetch(`/api/host/vans/${params.id}`)
-            .then(res => res.json())
-            .then(data => setHostVanDeets(data.vans[0])) /* using the index cause of mishap on server */
-    }, [params.id])
+        async function loadVans() {
+            setLoading(true)
+            try {
+                const data = await getVan(id)
+                setHostVanDeets(data)
+            } catch (err) {
+                setError(err)
+            } finally {
+                setLoading(false)
+            }
+        }
+        loadVans()
+    }, [id])
+
+    if (Loading) {
+        return <h1>Loading...</h1>
+    }
+
+    if (error) {
+        return <h1>There was an error: {error.message}</h1>
+    }
 
     return (
         <section>
